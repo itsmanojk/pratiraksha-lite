@@ -1,0 +1,9 @@
+{
+  "model_architecture": "Graph Convolutional Network",
+  "parameter_count": 22309,
+  "number_of_classes": 5,
+  "class_labels": ["Benign", "Ransomware", "Cryptolocker", "WannaCry", "Locky"],
+  "training_date": "2025-09-20",
+  "accuracy_percentage": 79.2,
+  "description": "A GCN model trained to classify network flows for ransomware detection."
+}

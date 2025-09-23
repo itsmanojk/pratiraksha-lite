@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: pratiraksha-backend
+    env: python
+    buildCommand: |
+      cd frontend
+      npm install
+      npm run build
+      cd ..
+      pip install -r backend/requirements.txt
+    startCommand: gunicorn --worker-class eventlet -w 1 backend.app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PORT
+        value: 10000
+    plan: free

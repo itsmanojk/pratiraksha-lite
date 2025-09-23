@@ -130,7 +130,7 @@ function App() {
 
   useEffect(() => {
     // Connect to backend
-    const socketConnection = io(process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000');
+    const socketConnection = io(process.env.REACT_APP_BACKEND_URL || 'http://localhost:5002');
     setSocket(socketConnection);
 
     socketConnection.on('connect', () => {
