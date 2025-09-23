@@ -1,0 +1,45 @@
+{
+  "Benign": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 5956.0
+  },
+  "Ransomware": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 828.0
+  },
+  "Cryptolocker": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 395.0
+  },
+  "Locky": {
+    "precision": 0.48651323929720364,
+    "recall": 0.9994916115912558,
+    "f1-score": 0.6544607190412783,
+    "support": 1967.0
+  },
+  "WannaCry": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 854.0
+  },
+  "accuracy": 0.7922,
+  "macro avg": {
+    "precision": 0.2973026478594407,
+    "recall": 0.3998983223182512,
+    "f1-score": 0.33089214380825566,
+    "support": 10000.0
+  },
+  "weighted avg": {
+    "precision": 0.69129715416976,
+    "recall": 0.7922,
+    "f1-score": 0.7243324234354194,
+    "support": 10000.0
+  }
+}
