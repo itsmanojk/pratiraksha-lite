@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LogContainer = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
+  background: rgba(0, 124, 145, 0.1);
+  backdrop-filter: blur(15px);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 124, 145, 0.3);
   padding: 2rem;
 `;
 
@@ -14,7 +14,7 @@ const LogTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: #f8fafc;
+  color: #004d40;
 `;
 
 const LogContent = styled.div`
@@ -26,7 +26,7 @@ const LogContent = styled.div`
 const EmptyState = styled.div`
   text-align: center;
   padding: 3rem;
-  color: #64748b;
+  color: #004d40aa;
   font-size: 1rem;
 `;
 
@@ -66,7 +66,7 @@ const ThreatHeader = styled.div`
 
 const ThreatTime = styled.span`
   font-weight: 600;
-  color: #f8fafc;
+  color: #004d40;
   font-family: 'JetBrains Mono', monospace;
 `;
 
@@ -78,7 +78,7 @@ const ThreatType = styled.span`
 
 const ThreatDetails = styled.div`
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: #006064;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
@@ -108,7 +108,7 @@ const ThreatLog = ({ threats }) => {
       transition={{ delay: 0.4, duration: 0.8 }}
     >
       <LogTitle>🚨 Real-Time Threat Detection Log</LogTitle>
-      
+
       <LogContent>
         {threats.length === 0 ? (
           <EmptyState>
@@ -130,7 +130,7 @@ const ThreatLog = ({ threats }) => {
                   <ThreatTime>{threat.timestamp}</ThreatTime>
                   <ThreatType>{threat.threat_type} detected</ThreatType>
                 </ThreatHeader>
-                
+
                 <ThreatDetails>
                   <ThreatDetail>
                     📍 {threat.source_ip} → {threat.dest_ip}

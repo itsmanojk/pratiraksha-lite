@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const ModelContainer = styled(motion.div)`
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
-  backdrop-filter: blur(20px);
+  background: linear-gradient(135deg, rgba(0, 124, 145, 0.1) 0%, rgba(0, 102, 117, 0.1) 100%);
+  backdrop-filter: blur(15px);
   border-radius: 20px;
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  border: 1px solid rgba(0, 124, 145, 0.3);
   padding: 2rem;
   height: fit-content;
 `;
@@ -15,7 +15,7 @@ const ModelTitle = styled.h2`
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  color: #f8fafc;
+  color: #004d40;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -32,7 +32,7 @@ const InfoRow = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 124, 145, 0.25);
 
   &:last-child {
     border-bottom: none;
@@ -41,12 +41,12 @@ const InfoRow = styled.div`
 
 const InfoLabel = styled.span`
   font-weight: 500;
-  color: #94a3b8;
+  color: #006064;
 `;
 
 const InfoValue = styled.span`
   font-weight: 600;
-  color: #f8fafc;
+  color: #004d40;
   font-family: 'JetBrains Mono', monospace;
 `;
 
@@ -55,28 +55,28 @@ const StatusBadge = styled(motion.span)`
   border-radius: 12px;
   font-size: 0.8rem;
   font-weight: 600;
-  background: ${props => props.active ? 'rgba(34, 197, 94, 0.2)' : 'rgba(239, 68, 68, 0.2)'};
-  color: ${props => props.active ? '#22c55e' : '#ef4444'};
-  border: 1px solid ${props => props.active ? '#22c55e' : '#ef4444'};
+  background: ${props => props.active ? 'rgba(0, 124, 145, 0.2)' : 'rgba(239, 68, 68, 0.2)'};
+  color: ${props => props.active ? '#007c91' : '#ef4444'};
+  border: 1px solid ${props => props.active ? '#007c91' : '#ef4444'};
 `;
 
 const AccuracyBar = styled.div`
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 77, 64, 0.1);
   border-radius: 3px;
   overflow: hidden;
 `;
 
 const AccuracyFill = styled(motion.div)`
   height: 100%;
-  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+  background: linear-gradient(90deg, #007c91 0%, #004d40 100%);
   border-radius: 3px;
 `;
 
 const ModelStatus = ({ modelInfo, connected }) => {
-  const accuracy = 79.2;
-  
+  const accuracy = modelInfo?.accuracy_percentage || 79.2;
+
   return (
     <ModelContainer
       initial={{ opacity: 0, x: 50 }}
@@ -85,13 +85,13 @@ const ModelStatus = ({ modelInfo, connected }) => {
       whileHover={{ scale: 1.02 }}
     >
       <ModelTitle>🧠 AI Model Status</ModelTitle>
-      
+
       <ModelInfo>
         <InfoRow>
           <InfoLabel>Model Type:</InfoLabel>
-          <InfoValue>Graph Convolutional Network</InfoValue>
+          <InfoValue>{modelInfo?.model_architecture || 'Graph Convolutional Network'}</InfoValue>
         </InfoRow>
-        
+
         <InfoRow>
           <InfoLabel>Status:</InfoLabel>
           <StatusBadge 
@@ -102,21 +102,21 @@ const ModelStatus = ({ modelInfo, connected }) => {
             {connected ? 'Active & Monitoring' : 'Disconnected'}
           </StatusBadge>
         </InfoRow>
-        
+
         <InfoRow>
           <InfoLabel>Parameters:</InfoLabel>
-          <InfoValue>{modelInfo?.parameters?.toLocaleString() || '22,309'}</InfoValue>
+          <InfoValue>{modelInfo?.parameter_count?.toLocaleString() || '22,309'}</InfoValue>
         </InfoRow>
-        
+
         <InfoRow>
           <InfoLabel>Classes:</InfoLabel>
-          <InfoValue>{modelInfo?.classes || '5'} Threat Types</InfoValue>
+          <InfoValue>{modelInfo?.number_of_classes || '5'} Threat Types</InfoValue>
         </InfoRow>
-        
+
         <InfoRow>
           <InfoLabel>Accuracy:</InfoLabel>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem', flex: 1 }}>
-            <InfoValue>{accuracy}%</InfoValue>
+            <InfoValue>{accuracy.toFixed(1)}%</InfoValue>
             <AccuracyBar>
               <AccuracyFill
                 initial={{ width: 0 }}

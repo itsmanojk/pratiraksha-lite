@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import StatsPanel from './components/StatsPanel';
 import ModelStatus from './components/ModelStatus';
 import ThreatLog from './components/ThreatLog';
@@ -15,8 +15,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2d3748 100%);
-    color: white;
+    background: linear-gradient(135deg, #e0f7fa 0%, #80deea 50%, #26c6da 100%);
+    color: #00363a;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -26,11 +26,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 54, 58, 0.1);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 54, 58, 0.4);
     border-radius: 4px;
   }
 `;
@@ -47,9 +47,8 @@ const AppContainer = styled.div`
 `;
 
 const Header = styled(motion.header)`
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.75);
+  border-bottom: 1px solid #007c91;
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
@@ -60,14 +59,14 @@ const HeaderContent = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  justify-content: between;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const Logo = styled.h1`
   font-size: 2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #00d4ff 0%, #5b85f7 50%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #006064 0%, #004d40 50%, #00251a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -79,17 +78,18 @@ const StatusBadge = styled(motion.div)`
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: rgba(34, 197, 94, 0.2);
-  border: 1px solid #22c55e;
+  background: rgba(0, 124, 145, 0.2);
+  border: 1px solid #007c91;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 500;
+  color: #004d40;
 `;
 
 const StatusDot = styled.div`
   width: 8px;
   height: 8px;
-  background: #22c55e;
+  background: #007c91;
   border-radius: 50%;
   animation: ${pulse} 2s infinite;
 `;
@@ -121,15 +121,13 @@ function App() {
     total_flows: 0,
     threats_detected: 0,
     threats_blocked: 0,
-    benign_flows: 0,
     detection_rate: '0%',
-    uptime: '00:00:00'
+    uptime: '00:00:00',
   });
   const [threats, setThreats] = useState([]);
   const [modelInfo, setModelInfo] = useState(null);
 
   useEffect(() => {
-    // Connect to backend
     const socketConnection = io(process.env.REACT_APP_BACKEND_URL || 'http://localhost:5002');
     setSocket(socketConnection);
 
@@ -188,7 +186,6 @@ function App() {
         >
           <StatsPanel stats={stats} />
           <ModelStatus modelInfo={modelInfo} connected={connected} />
-
           <ThreatLogContainer>
             <ThreatLog threats={threats} />
           </ThreatLogContainer>
